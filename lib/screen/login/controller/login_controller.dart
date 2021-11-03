@@ -1,0 +1,71 @@
+import 'package:dio/dio.dart' as Dio;
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:wedev_test/configs/url_app.dart';
+import 'package:wedev_test/services/network_api.dart';
+import 'package:wedev_test/services/session.dart';
+
+
+class LoginController extends GetxController {
+
+  var userameController = TextEditingController();
+  var passController = TextEditingController();
+
+  String token = "";
+  String name = "";
+  String email = "";
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+
+  callApiLogin({@required Function()? callbackDone}) async {
+
+
+    if(passController.text.isEmpty || passController.text.length < 6 ){
+      EasyLoading.showError("Password 6 character required");
+      return;
+    }
+    Session.shared.showLoading();
+    var formData = Dio.FormData();
+    formData.fields.add(MapEntry('username', userameController.text));
+    formData.fields.add(MapEntry('password', passController.text));
+
+    debugPrint(formData.fields.toString());
+
+    var network = NetworkAPI(
+      endpoint: url_login,
+      formData: formData,
+      jsonQuery: {"": ""},
+    );
+    var jsonBody = await network.callAPI(
+      method: "POST",
+    );
+    Session.shared.hideLoading();
+
+    if(jsonBody["token"] != null) {
+      try {
+
+        token = jsonBody["token"];
+        email = jsonBody["user_email"];
+        name = jsonBody["user_display_name"];
+
+        print("success $jsonBody");
+        EasyLoading.showSuccess("login success");
+        callbackDone!();
+      } on Exception catch (e) {
+        EasyLoading.showError(jsonBody["message"]);
+      }
+    }else{
+      EasyLoading.showError(jsonBody["message"]);
+    }
+  }
+}
