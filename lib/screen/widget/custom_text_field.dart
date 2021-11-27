@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String labelTxt;
   final String hintTxt;
   final TextEditingController controller;
 
-  const CustomTextField({Key? key, required this.labelTxt, required this.hintTxt, required this.controller}) : super(key: key);
+  const CustomTextField(
+      {Key? key, required this.hintTxt, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,20 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1.0),
-            ),
-            labelText: labelTxt,
-            hintText: hintTxt),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
+          ),
+          hintText: hintTxt,
+          hintStyle: TextStyle(
+            color: Colors.grey.withOpacity(0.5),
+          )
+        ),
       ),
     );
   }

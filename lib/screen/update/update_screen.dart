@@ -36,7 +36,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
           children: [
             CustomTextField(
               controller: userUpdateController.usernameController,
-              labelTxt: 'Enter Your name',
               hintTxt: "name",
             ),
             SizedBox(

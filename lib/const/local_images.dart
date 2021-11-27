@@ -1,0 +1,13 @@
+  String logo = "assets/icons/Eternalwallet_logo.svg";
+  String eyeClose = "assets/icons/eye_close.svg";
+  String eyeRed = "assets/icons/eye_red.svg";
+  String menu = "assets/icons/header_menu.svg";
+  String listGrey = "assets/icons/list_gray.svg";
+  String gridBlack = "assets/icons/grid_black.svg";
+  String aud = "assets/icons/AUD.svg";
+  String baht = "assets/icons/BAHT.svg";
+  String bitcoin = "assets/icons/Bitcoin.svg";
+  String php = "assets/icons/PHP.svg";
+  String vnd = "assets/icons/VND.svg";
+  String xec = "assets/icons/XEC.svg";
+  String pullDown = "assets/icons/pull_down.svg";

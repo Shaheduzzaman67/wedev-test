@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wedev_test/const/local_color.dart';
+import 'package:wedev_test/const/local_images.dart';
 import 'package:wedev_test/screen/home/home_screen.dart';
 import 'package:wedev_test/screen/login/controller/login_controller.dart';
 
@@ -8,6 +10,7 @@ import 'package:wedev_test/screen/widget/custom_button.dart';
 import 'package:wedev_test/screen/widget/custom_text.dart';
 import 'package:wedev_test/screen/widget/custom_text_field.dart';
 import 'package:get/get.dart';
+import 'package:wedev_test/screen/widget/password_text_filed.dart';
 import 'package:wedev_test/services/session.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,57 +26,59 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: boldtext("Login", textColor: white),
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SvgPicture.asset(
+              logo,
+              height: 100,
+              fit: BoxFit.contain,
+            ),
+            boldtext("Login", fontSize: 25),
+            SizedBox(
+              height: 20,
+            ),
             CustomTextField(
               controller: loginController.userameController,
-              labelTxt: 'Enter Your username',
-              hintTxt: "Username",
+              hintTxt: "Email or Phone",
             ),
             SizedBox(
               height: 20,
             ),
-            CustomTextField(
+            PasswordTextFiled(
               controller: loginController.passController,
-              labelTxt: 'Enter Your Password',
-              hintTxt: "Password",
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "password_name_req".tr;
+                }
+
+                return null;
+              },
+              label: 'Password',
             ),
             SizedBox(
               height: 20,
             ),
             CustomLargeButton(
-              btnText: "Sign in",
-              btnColor: grey,
-              txtColor: white,onTap: (){ loginController.callApiLogin(callbackDone: () {
-              Get.to(HomeScreen());
-              debugPrint("done");
-            });},
+              btnText: "Login",
+              btnColor: red,
+              txtColor: white,
+              onTap: () {
+                  Get.to(HomeScreen());
+              },
             ),
             SizedBox(
               height: 10,
             ),
-            boldtext("Do not have account?", textColor: black),
-            SizedBox(
-              height: 10,
-            ),
-            CustomLargeButton(
-              btnText: "Sign up",
-              btnColor: grey,
-              txtColor: white,onTap: (){
-
-              Session.shared.hideLoading();
-
-              Get.to(SignupScreen());},
+            Row(
+              children: [
+                text("Forgot Password?", textColor: black),
+                Spacer(),
+                boldtext("Sign up", textColor: red),
+              ],
             ),
           ],
         ),

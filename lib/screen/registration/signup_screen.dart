@@ -37,7 +37,6 @@ class _SignupScreenState extends State<SignupScreen> {
           children: [
             CustomTextField(
               controller: registrationController.usernameController,
-              labelTxt: 'Enter Your username',
               hintTxt: "Username",
             ),
             SizedBox(
@@ -45,7 +44,6 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             CustomTextField(
               controller: registrationController.emailController,
-              labelTxt: 'Enter Your Email',
               hintTxt: "Email",
             ),
             SizedBox(
@@ -53,7 +51,6 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             CustomTextField(
               controller: registrationController.passController,
-              labelTxt: 'Enter Your Password',
               hintTxt: "Password",
             ),
             SizedBox(

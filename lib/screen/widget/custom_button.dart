@@ -17,12 +17,12 @@ class CustomLargeButton extends StatelessWidget {
         onTap();
       },
       child: Container(
-        height: MediaQuery.of(context).size.height / 15,
+        height: MediaQuery.of(context).size.height / 20,
         width: MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           color: btnColor,
           borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
+            Radius.circular(2.0),
           ),
         ),
         child: Center(
